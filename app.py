@@ -15,7 +15,9 @@ def predict():
         data = request.get_json()
         features = np.array(data['features']).reshape(1,-1)
         prediction = model.predict(features)
-        return jsonify({'prediction':int(prediction[0])})
+        iris_classes = ['setosa', 'versicolor', 'virginica']
+        predicted_class = iris_classes[int(prediction[0])]
+        return jsonify({'prediction':predicted_class})
     except Exception as e:
         return jsonify({'error': str(e)})
     
